@@ -13,13 +13,18 @@ namespace ConsoleApp3
         {
             new CreateWork();
             Console.WriteLine();
-            new RunWork(1);
-            new RunWork(2);
-            new RunWork(3);
-            new RunWork(4);
-            new RunWork(5);
-            new RunWork(6);
-            Console.WriteLine();
+            int i = 0;
+            string[] allfiles = Directory.GetFiles(Environment.CurrentDirectory);
+            foreach (string filename in allfiles)
+            {
+                if (filename.Contains("job") && filename.Contains(".jb")) 
+                {
+                    new RunWork(++i);
+                    Console.WriteLine("=======");
+                }
+                
+            }
+            Console.WriteLine("=======");
             new Result();
             Console.ReadKey();
         }

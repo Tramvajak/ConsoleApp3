@@ -70,6 +70,7 @@ namespace ConsoleApp3
             map.Add("A", 0);
             map.Add("B", 1);
             map.Add("C", 2);
+            map.Add("D", 3);
 
             foreach (var item in arr)
             {
