@@ -11,20 +11,28 @@ namespace ConsoleApp3
     {
         static void Main(string[] args)
         {
+            //Создание подзадач
             new CreateWork();
+
+
             Console.WriteLine();
+
+
+            // поиск всех подзадач в корневом каталоге
             int i = 0;
             string[] allfiles = Directory.GetFiles(Environment.CurrentDirectory);
             foreach (string filename in allfiles)
             {
                 if (filename.Contains("job") && filename.Contains(".jb")) 
                 {
+                    // Выполнение позадач
                     new RunWork(++i);
                     Console.WriteLine("=======");
                 }
                 
             }
-            Console.WriteLine("=======");
+
+            // результат выполнение позадач
             new Result();
             Console.ReadKey();
         }

@@ -17,6 +17,8 @@ namespace ConsoleApp3
         {
             LoadFromFile();
         }
+        // Чтение задание из файла 
+        // считывается матрица смежности
         private static void LoadFromFile()
         {
             string text = null;
@@ -34,6 +36,9 @@ namespace ConsoleApp3
             GetPer(arr, _mass);
             Console.WriteLine($"Create {CountWork} work!");
         }
+        // методы полного перебора маршрутов матрицы проходящие через все города и возвращающуюся к исходному 
+        // городу.
+        /// ====================== перебор матрицы начало ==================
         private static void Swap(ref string a, ref string b)
         {
             if (a == b) return;
@@ -59,7 +64,7 @@ namespace ConsoleApp3
                 {
                     text = text + item;
                 }
-
+                // формирется текст и сохраняется в файл job#.jb для дальнейшей отправки на другую машину
                 text = text + list[0];
                 SaveFromFile(String.Format("job{0}.jb", ++CountWork), text);
             }
@@ -71,6 +76,8 @@ namespace ConsoleApp3
                     Swap(ref list[k], ref list[i]);
                 }
         }
+        /// ====================== перебор матрицы конец ==================
+        // метод сохранения в файл
         private static void SaveFromFile(string filename, string text)
         {
             using (StreamWriter sw = new StreamWriter(filename))

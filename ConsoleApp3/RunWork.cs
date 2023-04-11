@@ -15,6 +15,8 @@ namespace ConsoleApp3
             _nJob = nJob;
             LoadFromFile($"job{nJob}.jb");
         }
+        // Чтение подзадания из файла
+        // считывает файл с заданием на другой машине
         private static void LoadFromFile(string filename)
         {
             string text = null;
@@ -22,7 +24,6 @@ namespace ConsoleApp3
             {
                 text = sr.ReadToEnd();
             }
-            //text = text.Remove(text.Length-2);
             int _i = text.LastIndexOf("," + Environment.NewLine);
 
             Console.WriteLine($"Load file {filename}\n");
@@ -38,6 +39,7 @@ namespace ConsoleApp3
 
             Work(arr, mass);
         }
+        // метот конвертации из текста в массив вес ребер
         private static int[][] ParseStringToMass(string text)
         {
             int x = 0;
@@ -63,9 +65,11 @@ namespace ConsoleApp3
             return mass;
 
         }
+        // Выполнение подсчета суммы ребер заданного пути в файле подзадания
+        // и запись результата в файл
+        
         private static void Work(string[] arr, int[][] mass)
         {
-            int A = 0, B = 1, C = 2;
 
             List<int> road = new List<int>();
             Dictionary<string,int> map = new Dictionary<string, int>();
@@ -85,11 +89,12 @@ namespace ConsoleApp3
             int summ = 0;
             for (int i = 0; i < road.Count-1; i++)
             {
+                // вычесление суммы пройденного маршрута
                 int s = mass[road[i]][road[i + 1]];
                 summ += s;
             }
 
-
+            // запись результат в файл 
             using (StreamWriter sw = new StreamWriter("complite" + _nJob + ".jb"))
             {
                 sw.WriteLine(summ);
