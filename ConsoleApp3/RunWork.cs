@@ -22,16 +22,18 @@ namespace ConsoleApp3
             {
                 text = sr.ReadToEnd();
             }
-            text = text.Remove(text.Length-2);
-            int _i = text.LastIndexOf(Environment.NewLine);
+            //text = text.Remove(text.Length-2);
+            int _i = text.LastIndexOf("," + Environment.NewLine);
 
             Console.WriteLine($"Load file {filename}\n");
 
-            int[][] mass = ParseStringToMass(text.Remove(_i));
+            string _mass = text.Substring(0, _i + 3);
+
+            int[][] mass = ParseStringToMass(_mass);
 
             string _text = text.Substring(_i + 2);
             Console.WriteLine($"Work: {_text}\n");
-            Console.WriteLine($"Table: \n{text.Remove(_i)}");
+            Console.WriteLine($"Table: \n{_mass}");
             string[] arr = _text.ToCharArray().Select(c => c.ToString()).ToArray();
 
             Work(arr, mass);

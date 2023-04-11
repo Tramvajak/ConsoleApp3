@@ -24,55 +24,15 @@ namespace ConsoleApp3
             {
                 text = sr.ReadToEnd();
             }
-            int _i = text.LastIndexOf(Environment.NewLine);
-            
+            int _i = text.LastIndexOf("," + Environment.NewLine);
 
-            
-            int[][] mass = ParseStringToMass(text.Remove(_i));
+            string _mass = text.Substring(0, _i + 3);
 
-            string _text = text.Substring(_i+2);
+            string _text = text.Substring(_i+3);
             string[] arr = _text.ToCharArray().Select(c => c.ToString()).ToArray();
 
-            GetPer(arr, mass);
+            GetPer(arr, _mass);
             Console.WriteLine($"Create {CountWork} work!");
-        }
-        private static int[][] ParseStringToMass(string text)
-        {
-            int x = 0;
-            
-
-            string[] _t = text.Split(new string[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
-
-            int[][] mass = new int[_t.Length][];
-
-            foreach (var item in _t)
-            {
-                
-                List<int> values = new List<int>();
-                string[] _temp = item.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                mass[x] = new int[_temp.Length];
-                for (int i = 0; i < _temp.Length; i++)
-                {
-                    mass[x][i] = Int32.Parse(_temp[i].ToString());
-                }
-                x++;
-            }
-
-            return mass;
-
-        }
-        private static string ParseMassToString(int[][] mass)
-        {
-            string text = null;
-            foreach (var item in mass)
-            {
-                foreach (var _item in item)
-                {
-                    text = text + _item + ",";
-                }
-                text = text + Environment.NewLine;
-            }
-            return text;
         }
         private static void Swap(ref string a, ref string b)
         {
@@ -83,17 +43,17 @@ namespace ConsoleApp3
             b = temp;
         }
 
-        public static void GetPer(string[] list, int[][] mass)
+        public static void GetPer(string[] list, string mass)
         {
             int x = list.Length - 1;
             GetPer(list, mass, 0, x);
         }
 
-        private static void GetPer(string[] list, int[][] mass, int k, int m)
+        private static void GetPer(string[] list, string mass, int k, int m)
         {
             if (k == m)
             {
-                string text = ParseMassToString(mass);
+                string text = mass;
 
                 foreach (var item in list)
                 {
